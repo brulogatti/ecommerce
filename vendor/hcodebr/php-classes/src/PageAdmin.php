@@ -6,14 +6,16 @@ use Rain\Tpl;
 class PageAdmin {
 
     private $tpl;
-    private $itens = [];
+    private $options = [];
     private $defaults = [
+        "header"=>true,
+        "footer"=>true,
         "data"=>[]
     ];
 
     public function __construct($opts = array(), $tpl_dir= "/views/admin/")
     {
-        $this->itens = array_merge($this->defaults, $opts);
+        $this->options = array_merge($this->defaults, $opts);
 
         // config
         $config = array(
@@ -26,9 +28,9 @@ class PageAdmin {
 
         $this->tpl = new Tpl;
 
-        $this->setData($this->itens["data"]);
+        $this->setData($this->options["data"]);
 
-        $this->tpl->draw("header");
+        if($this->options["header"] == true) $this->tpl->draw("header");
     }
 
     private function setData($data = array()){
@@ -45,7 +47,7 @@ class PageAdmin {
 
     public function __destruct()
     {
-        $this->tpl->draw("footer");
+        if($this->options["footer"]==true) $this->tpl->draw("footer");
     }
 }
 /*
