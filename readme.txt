@@ -20,3 +20,4 @@ Inserir/Remover script:
         RewriteRule ^ index.php [QSA,L]
 	</Directory>
 </VirtualHost>
+3 . Parar a execução e executar novamente o apache/xampp
