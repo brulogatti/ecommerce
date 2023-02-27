@@ -6,6 +6,7 @@ use \Slim\Slim;
 use \Hcode\Model\User;
 use \Hcode\PageAdmin;
 use \Hcode\Model\Category;
+use HCode\Page;
 
 $app = new Slim();
 
@@ -280,6 +281,20 @@ $app->post("/admin/categories/:idcategory", function($idcategory){
 	header("Location: /admin/categories");
 
 	exit;
+
+});
+
+$app->get("/categories/:idcategory", function($idcategory){
+	$category = new Category();
+
+	$category->get((int)$idcategory);
+
+	$page = new Hcode\Page();
+
+	$page->setTpl("category",array(
+		"category"=>$category->getValues(),
+		"products"=>[]
+	));
 
 });
 
