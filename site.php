@@ -45,5 +45,18 @@ $app->get("/categories/:idcategory", function($idcategory){
 
 });
 
+$app->get("/products/:desurl", function($desurl){
+	$product = new Hcode\Model\Product();
+
+	$product->getFromUrl($desurl);
+
+	$page = new Hcode\Page();
+
+	$page->setTpl("product-detail", [
+		'product'=>$product->getValues(),
+		'categories'=>$product->getCategories()
+	]);
+})
+
 
 ?>
