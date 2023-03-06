@@ -299,6 +299,16 @@ class User extends Model{
 
 	}
 
+    public static function checkLoginExists($login){
+        $sql = new Sql();
+
+        $results = $sql->select("SELECT * FROM tb_users WHERE deslogin = :deslogin", array(
+            ":deslogin"=>$login
+        ));
+
+        return(count($results)>0);
+    }
+
 }
 
 ?>
